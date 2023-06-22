@@ -7,10 +7,10 @@ const fruit = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Blackb
 function search(str) { 
 	let results = [];
 	str = str.toLowerCase();
-	for (let ind of fruit) {
+	for (let frt of fruit) {
 		//this condtional checks if the input str is inside the fruit array
-		if (ind.toLowerCase().includes(str.toLowerCase())) {
-			results.push(ind);
+		if (frt.toLowerCase().includes(str.toLowerCase())) {
+			results.push(frt);
 		}
 	}
 
@@ -27,6 +27,7 @@ function showSuggestions(results) {
 	suggestions.innerHTML = '';
 	if (results.length > 0) {
 	for (let i = 0; i < results.length; i++) {
+		//this adds the result inside of a li that's added to suggestions
 		let li = document.createElement('li');
 		li.innerText = results[i];
 		suggestions.append(li);
