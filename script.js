@@ -7,34 +7,39 @@ const fruit = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Blackb
 function search(str) { 
 	let results = [];
 	str = str.toLowerCase();
-	
-	//loop comes from codehim.com
-	for (let i = 0; i < fruit.length; i++) {
-		//loops through fruit array to see if str matches any strings
-		if (fruit[i].toLowerCase().indexOf(str) > -1) {
-			//if str matches any of the strings then the string is pushed to results
-			results.push(fruit[i]);
+	for (let ind of fruit) {
+		//this condtional checks if the input str is inside the fruit array
+		if (ind.toLowerCase().includes(str.toLowerCase())) {
+			results.push(ind);
 		}
 	}
-	
+
 	return results;
 }
 
 function searchHandler(e) {
 	let inputVal = e.target.value;
-	let results = [];
-	if (inputVal.length !== 0) {
-		results = search(inputVal);
-	}
-	showSuggestions(results,inputVal);
+	let results = search(inputVal)
+	showSuggestions(results);
 }
 
-function showSuggestions(results, inputVal) {
-	
+function showSuggestions(results) {
+	suggestions.innerHTML = '';
+	if (results.length > 0) {
+	for (let i = 0; i < results.length; i++) {
+		let li = document.createElement('li');
+		li.innerText = results[i];
+		suggestions.append(li);
+	}
+	} 
 }
 
 function useSuggestion(e) {
-	// TODO
+	//if a li is clicked then the input will change to the li
+	if (e.target.matches('li')) {
+		input.value = e.target.innerText;
+	}
+	suggestions.innerHTML = '';
 }
 
 input.addEventListener('keyup', searchHandler);
